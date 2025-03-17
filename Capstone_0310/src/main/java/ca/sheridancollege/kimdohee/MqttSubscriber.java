@@ -8,7 +8,8 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 public class MqttSubscriber {
 	public static void main(String[] args) {
-        String broker = "tcp://10.23.169.55:1883"; // Example: "tcp://192.168.1.100:1883"
+        //String broker = "tcp://10.23.169.55:1883"; 
+        String broker = "tcp://10.14.3.8"; 
         String topic = "test/topic";              
         String clientId = "JavaSubscriber";
  
