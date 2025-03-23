@@ -1,4 +1,4 @@
-package ca.sheridancollege.kimdohee.beans;
+package ca.sheridancollege.smartwaste.beans;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
