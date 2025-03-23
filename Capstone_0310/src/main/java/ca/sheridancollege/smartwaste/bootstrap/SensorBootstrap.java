@@ -18,8 +18,7 @@ public class SensorBootstrap implements CommandLineRunner {
 		
 		
 		// save dummy data 
-		sensorService.save(
-				Sensor.builder().batteryStatus("High").location("A building").lastBatteryUpdateDate("Mar 23").build());
+		//sensorService.save(Sensor.builder().batteryStatus("High").location("A building").lastBatteryUpdateDate("Mar 23").build());
 
 	}
 
