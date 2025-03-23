@@ -1,4 +1,4 @@
-package ca.sheridancollege.kimdohee.beans;
+package ca.sheridancollege.smartwaste.beans;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,7 +19,7 @@ public class Sensor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Integer batteryStatus;
+    private String batteryStatus;
 
     private String location;
 
