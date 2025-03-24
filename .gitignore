@@ -143,3 +143,5 @@ lib/
 # Arduino IDE project settings
 *.arduino.ide.json
 sketch.json
+JavaV17_Server/src/test*
+
