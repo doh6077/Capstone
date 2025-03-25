@@ -1,18 +1,20 @@
 <div class="row">
     <div class="col-md-2">&nbsp;</div>
     <div class="col-md-8">
-        <div id="sensorsPanel" class="panel panel-default">
-            <div class="panel-heading">
-            <h3 class="panel-title">Sensor Component</h3>
-            </div>
-            <div class="panel-body">
-                <div class="row">
-                <div class="col-md-12">
-                    <router-outlet></router-outlet>
-                </div>
-                </div>
-
+      <div id="sensorsPanel" class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Sensor Component</h3>
         </div>
+        <div class="panel-body">
+          <a routerLink="/view" class="btn btn-primary">View Sensors</a>
+          <div class="row">
+            <div class="col-md-12">
+              <router-outlet></router-outlet>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="col-md-2">&nbsp;</div>
-</div>
+  </div>
+  

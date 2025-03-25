@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Sensor } from '../sensor';
-
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-sensor-list',
-  imports: [],
+  imports: [ RouterLink],
   templateUrl: './sensor-list.component.html',
   styleUrl: './sensor-list.component.css'
 })
