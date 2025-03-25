@@ -145,3 +145,6 @@ lib/
 sketch.json
 JavaV17_Server/src/test*
 
+# Angular 
+*.tsbuildinfo
+.angular/
