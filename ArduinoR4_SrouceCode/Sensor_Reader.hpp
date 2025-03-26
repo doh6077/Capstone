@@ -5,7 +5,7 @@
 #include <Arduino_JSON.h>
 
 #include "WiFi_Connecter.hpp"
-class Sensor_Reader {
+class SensorReader {
 private:
   WiFiConnecter wifiConnecter{};
 

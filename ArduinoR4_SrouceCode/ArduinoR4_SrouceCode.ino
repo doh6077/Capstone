@@ -3,8 +3,8 @@
 
 
 WiFiConnecter wiFiConnecter;
-Mqtt_Publisher mqttPublisher;
-Sensor_Reader sensorReader{};
+MqttPublisher mqttPublisher;
+SensorReader sensorReader{};
 
 void setup() {
   //Initialize serial and wait for port to open:

@@ -1,6 +1,6 @@
 #include "Mqtt_Publisher.hpp"
 
-void Mqtt_Publisher::connectToBroker() {
+void MqttPublisher::connectToBroker() {
   Serial.print("Attempting to connect to the MQTT broker: ");
   Serial.println(pi_ip);
   while (!mqttClient.connect(pi_ip, pi_broker_port)) {
@@ -14,13 +14,13 @@ void Mqtt_Publisher::connectToBroker() {
 }
 
 
-void Mqtt_Publisher::publishSensorReading(float distance) {
+void MqttPublisher::publishSensorReading(float distance) {
   mqttClient.poll();
   mqttClient.beginMessage(topic);
   mqttClient.print(distance);
   mqttClient.endMessage();
 }
-void Mqtt_Publisher::publishSensorMetadata(String sensorMetadata) {
+void MqttPublisher::publishSensorMetadata(String sensorMetadata) {
   Serial.println("Sensor Data:");
   Serial.println(sensorMetadata);
   char* topic = "smartwaste/sensor/metadata";

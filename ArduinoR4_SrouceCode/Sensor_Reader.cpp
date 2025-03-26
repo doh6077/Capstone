@@ -1,6 +1,6 @@
 #include "Sensor_Reader.hpp"
 
-void Sensor_Reader::setupSensor() {
+void SensorReader::setupSensor() {
   // 1st sensor
   pinMode(trigerPin1, OUTPUT);  // Set Trig as output
   pinMode(echoPin1, INPUT);   // Set Echo as input Serial.begin(9600); // Start serial monitor
@@ -14,7 +14,7 @@ void Sensor_Reader::setupSensor() {
   pinMode(echoPin3, INPUT);
 }
 
-float Sensor_Reader::readSensorData1() {
+float SensorReader::readSensorData1() {
   digitalWrite(trigerPin1, LOW);
   delayMicroseconds(2);
   digitalWrite(trigerPin1, HIGH);
@@ -31,7 +31,7 @@ float Sensor_Reader::readSensorData1() {
 
   return distance;
 }
-float Sensor_Reader::readSensorData2() {
+float SensorReader::readSensorData2() {
   digitalWrite(trigerPin2, LOW);
   delayMicroseconds(2);
   digitalWrite(trigerPin2, HIGH);
@@ -48,7 +48,7 @@ float Sensor_Reader::readSensorData2() {
 
   return distance;
 }
-float Sensor_Reader::readSensorData3() {
+float SensorReader::readSensorData3() {
   digitalWrite(trigerPin3, LOW);
   delayMicroseconds(2);
   digitalWrite(trigerPin3, HIGH);
@@ -65,7 +65,7 @@ float Sensor_Reader::readSensorData3() {
 
   return distance;
 }
-String Sensor_Reader::registerSensor() {
+String SensorReader::registerSensor() {
     setupSensor();
     JSONVar sensorJSON;
     sensorJSON["macAddress"] = wifiConnecter.getBoardMAC();

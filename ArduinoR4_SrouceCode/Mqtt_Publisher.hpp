@@ -5,7 +5,7 @@
 #include <WiFiClient.h>
 #include "Sensor_Reader.hpp"
 
-class Mqtt_Publisher {
+class MqttPublisher {
 private:
 
   WiFiClient wifiClient;
