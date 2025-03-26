@@ -21,14 +21,18 @@ void setup() {
   // connect Arduino board to MQTT broker
   mqttPublisher.connectToBroker();
 
-  // set up sensor
-  sensorReader.setupSensor();
-
+  // setup and register sensor
+  String sensorMetadata = sensorReader.registerSensor();
+  mqttPublisher.publishSensorMetadata(sensorMetadata);
 }
 
 void loop() {
-  
-  float distance = sensorReader.readSensorData();
-  mqttPublisher.publish(distance);
 
+  // float distance = sensorReader.readSensorData1();
+  // mqttPublisher.publishSensorReading(distance);
+  // float distance2 = sensorReader.readSensorData2();
+  // mqttPublisher.publishSensorReading(distance2);
+  // float distance3 = sensorReader.readSensorData3();
+  // mqttPublisher.publishSensorReading(distance3);
+  delay(10000);
 }

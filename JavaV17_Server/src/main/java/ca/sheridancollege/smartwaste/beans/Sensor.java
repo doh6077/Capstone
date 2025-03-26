@@ -19,9 +19,9 @@ public class Sensor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String batteryStatus;
+    private String macAddress;
 
-    private String location;
+    private int trigerPin;
 
-    private String lastBatteryUpdateDate;
+    private int echoPin;
 }

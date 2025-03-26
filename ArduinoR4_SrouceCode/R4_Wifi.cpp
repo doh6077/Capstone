@@ -26,13 +26,13 @@ void WiFiConnecter::connectToWifi() {
     // wait 5 seconds for connection:
     delay(5000);
   }
-  Serial.print("You're connected to the network");
+  Serial.println("You're connected to the network");
   this->printCurrentNet();
-  this->printWifiData();
+  this->printBoardNetInterface();
 }
 
-// Print Arduino R4 Wifi Information
-void WiFiConnecter::printWifiData() {
+// Print Arduino R4 Board Network Interface
+void WiFiConnecter::printBoardNetInterface() {
   // print your board's IP address:
   IPAddress ip = WiFi.localIP();
   Serial.print("IP Address: ");
@@ -42,6 +42,7 @@ void WiFiConnecter::printWifiData() {
   WiFi.macAddress(mac);
   Serial.print("MAC address: ");
   printMacAddress(mac);
+  getBoardMAC();
 }
 
 void WiFiConnecter::printCurrentNet() {
@@ -54,7 +55,7 @@ void WiFiConnecter::printCurrentNet() {
   WiFi.BSSID(bssid);
   Serial.print("BSSID: ");
   printMacAddress(bssid);
-  
+
   // print the received signal strength:
   long rssi = WiFi.RSSI();
   Serial.print("signal strength (RSSI):");
@@ -77,4 +78,20 @@ void WiFiConnecter::printMacAddress(byte mac[]) {
     Serial.print(mac[i], HEX);
   }
   Serial.println();
+}
+String WiFiConnecter::getBoardMAC() {
+  String macStr = "";
+  byte mac[6];
+  WiFi.macAddress(mac);
+  for (int i = 0; i < 6; i++) {
+    if (i > 0) {
+      Serial.print(":");
+      macStr += ":";
+    }
+    if (mac[i] < 16) {
+      macStr += "0";
+    }
+    macStr += String(mac[i], HEX);
+  }
+  return macStr;
 }

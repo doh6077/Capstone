@@ -14,9 +14,18 @@ void Mqtt_Publisher::connectToBroker() {
 }
 
 
-void Mqtt_Publisher::publish(float distance) {
+void Mqtt_Publisher::publishSensorReading(float distance) {
   mqttClient.poll();
   mqttClient.beginMessage(topic);
   mqttClient.print(distance);
+  mqttClient.endMessage();
+}
+void Mqtt_Publisher::publishSensorMetadata(String sensorMetadata) {
+  Serial.println("Sensor Data:");
+  Serial.println(sensorMetadata);
+  char* topic = "smartwaste/sensor/metadata";
+  mqttClient.poll();
+  mqttClient.beginMessage(topic);
+  mqttClient.print(sensorMetadata);
   mqttClient.endMessage();
 }

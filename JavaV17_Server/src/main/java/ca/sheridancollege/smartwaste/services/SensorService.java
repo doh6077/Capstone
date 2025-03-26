@@ -10,7 +10,8 @@ import ca.sheridancollege.smartwaste.beans.Sensor;
 public interface SensorService {
 
 	public List<Sensor> findAll();
-	public Sensor findById(Long id); 
+	public Sensor findById(Long id);
+	public Sensor findByMacAddress(String macAddress);
 	public Sensor save(Sensor sensor); 
 
 }

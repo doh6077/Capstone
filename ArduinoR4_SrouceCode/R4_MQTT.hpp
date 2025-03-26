@@ -21,7 +21,8 @@ private:
 
 public:
   void connectToBroker();
-  void publish(float distance);
+  void publishSensorReading(float distance);
+  void publishSensorMetadata(String sensorMetadata);
 };
 
 #endif
