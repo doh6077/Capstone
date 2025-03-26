@@ -16,12 +16,11 @@ private:
   // ROOM 144A ethernet IP { 10, 14, 3, 8 }
   IPAddress pi_ip{ 192, 168, 40, 21 };
   int pi_broker_port = 1883;
-  char* topic = "test/topic";
   bool isConnected = false;
 
 public:
   void connectToBroker();
-  void publishSensorReading(float distance);
+  void publishSensorReading(String sensorReadingData);
   void publishSensorMetadata(String sensorMetadata);
 };
 

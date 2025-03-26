@@ -5,10 +5,12 @@
 #include <Arduino_JSON.h>
 
 #include "WiFi_Connecter.hpp"
+#include "Sensor.hpp"
 class SensorReader {
 private:
   WiFiConnecter wifiConnecter{};
-
+  String macAddress;
+  Sensor sensors[3];
   /*
   Each pair of trigerPin and echoPin represents one sensor.
   The int value represents which pin should be wired.
@@ -27,17 +29,7 @@ private:
 
 public:
   void setupSensor();
-  float readSensorData1();
-  float readSensorData2();
-  float readSensorData3();
-
-  /*
-  Send sensor meta data (MAC address of the Arduio the sensor connects to,
-  the pin number) under the topic /smartwaste/sensor/metadata/
-  On Java server:
-  Check the database: if the sensor with the MAC address and pin numbers already exists, do nothing.
-  Otherwise, add a new sensor to the database.
-  */
+  String readData();
   String registerSensor();
 };
 

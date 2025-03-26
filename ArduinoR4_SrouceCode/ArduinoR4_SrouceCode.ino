@@ -27,12 +27,7 @@ void setup() {
 }
 
 void loop() {
-
-  // float distance = sensorReader.readSensorData1();
-  // mqttPublisher.publishSensorReading(distance);
-  // float distance2 = sensorReader.readSensorData2();
-  // mqttPublisher.publishSensorReading(distance2);
-  // float distance3 = sensorReader.readSensorData3();
-  // mqttPublisher.publishSensorReading(distance3);
-  delay(10000);
+  String sensorMetadata = sensorReader.readData();
+  mqttPublisher.publishSensorReading(sensorMetadata);
+  delay(5000);
 }

@@ -2,6 +2,8 @@
 
 ## Sensor Metadata Format:
 
+-   topic: smartwaste/sensor/metadata
+
 ```json
 {
     "macAddress": "34:b7:da:5d:80:0c",
@@ -16,11 +18,12 @@
 
 ## Sensor Reading Data Format:
 
+-   topic: smartwaste/sensor/readingdata
+
 ```json
-{
-    "macAddress": "34:b7:da:5d:80:0c",
-    "trigerPin": 7,
-    "echoPin": 8,
-    "data": 20.6
-}
+[
+    { "macAddress": "34:b7:da:5d:80:0c", "trigerPin1": 7, "echoPin1": 8, "distance": 76.704002380371094 },
+    { "macAddress": "34:b7:da:5d:80:0c", "trigerPin1": 12, "echoPin1": 13, "distance": 93.5 },
+    { "macAddress": "34:b7:da:5d:80:0c", "trigerPin1": 2, "echoPin1": 4, "distance": 49.18099 }
+]
 ```

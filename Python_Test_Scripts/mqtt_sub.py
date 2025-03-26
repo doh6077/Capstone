@@ -2,7 +2,8 @@ import paho.mqtt.client as mqtt
 
 BROKER = "localhost" # broker ip
 PORT = 1883 # broker port
-TOPIC = "smartwaste/sensor/metadata"
+# TOPIC = "smartwaste/sensor/metadata"
+TOPIC= "smartwaste/sensor/readingdata"
 
 # Callback function for when a message is received
 def on_message(client, userdata, msg):
