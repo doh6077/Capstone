@@ -3,9 +3,8 @@
 
 #include <Arduino.h>
 #include <Arduino_JSON.h>
-#include <assert.h>
 
-#include "R4_Wifi.hpp"
+#include "WiFi_Connecter.hpp"
 class Sensor_Reader {
 private:
   WiFiConnecter wifiConnecter{};
@@ -32,8 +31,8 @@ public:
   float readSensorData2();
   float readSensorData3();
 
-  /* 
-  Send sensor meta data (MAC address of the Arduio the sensor connects to, 
+  /*
+  Send sensor meta data (MAC address of the Arduio the sensor connects to,
   the pin number) under the topic /smartwaste/sensor/metadata/
   On Java server:
   Check the database: if the sensor with the MAC address and pin numbers already exists, do nothing.

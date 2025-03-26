@@ -1,4 +1,4 @@
-#include "R4_Wifi.hpp"
+#include "WiFi_Connecter.hpp"
 
 void WiFiConnecter::checkWifiModule() {
   if (WiFi.status() == WL_NO_MODULE) {
