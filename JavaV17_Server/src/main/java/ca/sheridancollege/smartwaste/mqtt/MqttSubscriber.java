@@ -1,4 +1,4 @@
-package ca.sheridancollege.smartwaste;
+package ca.sheridancollege.smartwaste.mqtt;
 
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;
