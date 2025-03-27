@@ -13,5 +13,7 @@ public interface SensorService {
 	public Sensor findById(Long id);
 	public Sensor findByMacAddress(String macAddress);
 	public Sensor save(Sensor sensor); 
+	public Sensor update(Long id, Sensor updatedSensor);
+	public void delete(Long id);
 
 }

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import ca.sheridancollege.smartwaste.beans.Sensor;
 import ca.sheridancollege.smartwaste.services.SensorService;
+import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 
 
@@ -21,7 +22,11 @@ import lombok.AllArgsConstructor;
 public class MqttSubscriber {
 	
 	@Autowired
-	private SensorService sensorService;
+	private SensorService sensorService; 
+	//GPT:
+	//private final SensorService sensorService;
+
+	
 	private static final String BROKER_URL = "tcp://localhost:1883"; // Public broker or your own
 	private static final String CLIENT_ID = "SpringBootSubscriber";
 	private static final String[] TOPICS = { "smartwaste/sensor/metadata", "smartwaste/sensor/reading-data" };
@@ -62,6 +67,41 @@ public class MqttSubscriber {
 			e.printStackTrace();
 		}
 	}
+	
+	// GPT:
+	/* @PostConstruct
+	public void init() {
+	    try {
+	        MqttClient client = new MqttClient(BROKER_URL, CLIENT_ID, new MemoryPersistence());
+	        MqttConnectOptions options = new MqttConnectOptions();
+	        options.setCleanSession(true);
+
+	        client.setCallback(new MqttCallback() {
+	            @Override
+	            public void connectionLost(Throwable cause) {
+	                System.out.println("MQTT Connection Lost!");
+	            }
+
+	            @Override
+	            public void messageArrived(String topic, MqttMessage message) throws Exception {
+	                System.out.println("Received Message from " + topic + ": " + new String(message.getPayload()));
+	                handleIncomingMessage(topic, message);
+	            }
+
+	            @Override
+	            public void deliveryComplete(IMqttDeliveryToken token) {
+	            }
+	        });
+
+	        client.connect(options);
+	        client.subscribe(TOPICS);
+	        System.out.println("MQTT subscriber initialized.");
+
+	    } catch (MqttException e) {
+	        e.printStackTrace();
+	    }
+	}*/
+
 
 	private void handleIncomingMessage(String topic, MqttMessage message) {
 		try {

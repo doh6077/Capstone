@@ -41,5 +41,19 @@ public class SensorServiceImpl implements SensorService {
 		sensorRepository.save(sensor);
 		return sensor;
 	}
+	
+	@Override
+	public Sensor update(Long id, Sensor updatedSensor) {
+	    return sensorRepository.findById(id).map(existingSensor -> {
+	        existingSensor.setMacAddress(updatedSensor.getMacAddress());
+	        existingSensor.setTrigerPin(updatedSensor.getTrigerPin());
+	        existingSensor.setEchoPin(updatedSensor.getEchoPin());
+	        return sensorRepository.save(existingSensor);
+	    }).orElse(null);
+	}
 
+	@Override
+	public void delete(Long id) {
+	    sensorRepository.deleteById(id);
+	}
 }
