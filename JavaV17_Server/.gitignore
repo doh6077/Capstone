@@ -5,9 +5,10 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-# Node modules
+# Node modules and other Angular dev files
 node_modules/
-
+**/dist/
+**/build/
 # Angular build output
 src/main/webapp/dist/
 *.log
@@ -48,3 +49,6 @@ build/
 # OS-generated
 .DS_Store
 Thumbs.db
+
+/src/main/resources/static/*
+!/src/main/resources/static/.gitkeep
