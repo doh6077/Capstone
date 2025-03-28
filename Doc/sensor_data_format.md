@@ -18,7 +18,7 @@
 
 ## Sensor Reading Data Format:
 
--   topic: smartwaste/sensor/readingdata
+-   topic: smartwaste/sensor/reading-data
 
 ```json
 [
