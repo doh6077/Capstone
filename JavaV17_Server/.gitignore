@@ -31,3 +31,10 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Angular build files
+.angular/
+*.tsbuildinfo
+*.log
+dist/
+node_modules/
