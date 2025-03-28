@@ -1,10 +1,10 @@
-#include "R4_Wifi.hpp"
-#include "R4_MQTT.hpp"
+#include "WiFi_Connecter.hpp"
+#include "Mqtt_Publisher.hpp"
 
 
 WiFiConnecter wiFiConnecter;
-Mqtt_Publisher mqttPublisher;
-Sensor_Reader sensorReader{};
+MqttPublisher mqttPublisher;
+SensorReader sensorReader{};
 
 void setup() {
   //Initialize serial and wait for port to open:
@@ -21,14 +21,13 @@ void setup() {
   // connect Arduino board to MQTT broker
   mqttPublisher.connectToBroker();
 
-  // set up sensor
-  sensorReader.setupSensor();
-
+  // setup and register sensor
+  String sensorMetadata = sensorReader.registerSensor();
+  mqttPublisher.publishSensorMetadata(sensorMetadata);
 }
 
 void loop() {
-  
-  float distance = sensorReader.readSensorData();
-  mqttPublisher.publish(distance);
-
+  String sensorMetadata = sensorReader.readData();
+  mqttPublisher.publishSensorReading(sensorMetadata);
+  delay(5000);
 }

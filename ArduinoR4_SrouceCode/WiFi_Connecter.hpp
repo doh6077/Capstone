@@ -5,17 +5,18 @@
 
 class WiFiConnecter {
 private:
-  char ssid[30] = "Pixel_3014";  // network SSID
-  char pass[30] = "hsyhsy000";   // network password
+  char ssid[30] = "Benny";  // network SSID
+  char pass[30] = "sandra1000";   // network password
   int status = WL_IDLE_STATUS;
 
 public:
   void checkWifiModule();
   void checkFirmwareVersion();
   void connectToWifi();
-  void printWifiData();
+  void printBoardNetInterface();
   void printCurrentNet();
   void printMacAddress(byte mac[]);
+  String getBoardMAC();
 };
 
 #endif
