@@ -28,8 +28,8 @@ String SensorReader::readData() {
     char distanceStr[10];
     snprintf(distanceStr, sizeof(distanceStr), "%.2f", distance); // keep 2 digits after decimal
     oneSensorReading["macAddress"] = macAddress;
-    oneSensorReading["trigerPin1"] = sensors[i].getTrigerPin();
-    oneSensorReading["echoPin1"] = sensors[i].getEchoPin();
+    oneSensorReading["trigerPin"] = sensors[i].getTrigerPin();
+    oneSensorReading["echoPin"] = sensors[i].getEchoPin();
     oneSensorReading["distance"] = distanceStr;
     sensorsReading[i] = oneSensorReading;
   }
