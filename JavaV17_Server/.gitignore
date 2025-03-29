@@ -1,9 +1,23 @@
+# Helper and build folders
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+# Node modules and other Angular dev files
+node_modules/
+**/dist/
+**/build/
+# Angular build output
+src/main/webapp/dist/
+*.log
+*.chunk.js
+*.chunk.css
+*.map
+*.mjs
+
+# IDEs
 ### STS ###
 .apt_generated
 .classpath

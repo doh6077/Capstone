@@ -1,0 +1,17 @@
+<h3>Sensor List</h3>
+<table class="table table-striped">
+  <tr>
+    <th>Location</th>
+    <th>Battery Status</th>
+    <th>Last Battery Update</th>
+  </tr>
+  @for (sensor of sensors; track sensor.id) {
+    <tr>
+      <td>{{ sensor.location }}</td>
+      <td>{{ sensor.batteryStatus }}</td>
+      <td>{{ sensor.lastBatteryUpdateDate }}</td>
+    </tr>
+  }
+</table>
+<p><a routerLink="/">Back to Home</a></p>
+
