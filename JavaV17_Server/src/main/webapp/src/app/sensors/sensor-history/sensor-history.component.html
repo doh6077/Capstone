@@ -1,0 +1,15 @@
+<h3>Sensor History</h3>
+<table class="table table-striped">
+  <tr>
+    <th>Distance</th>
+    <th>Time </th>
+  </tr>
+  @for (reading of readings; track reading.historyId) {
+    <tr>
+      <td>{{ reading.distanceReading }}</td>
+      <td>{{ reading.timestamp }}</td>
+
+    </tr>
+  }
+</table>
+<p><a routerLink="/view">Back to sensors</a></p>
