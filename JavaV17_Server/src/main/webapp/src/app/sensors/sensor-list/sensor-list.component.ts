@@ -22,15 +22,5 @@ export class SensorListComponent {
   constructor(private sensorService:SensorService){}
   ngOnInit():void{
     this.getSensors();
-
-
-    /*
-  this.sensors = [
-  {id: 1, batteryStatus: 'High', lastBatteryUpdateDate:"Mar 25", location:"A building"},
-  {id: 2, batteryStatus: 'Low', lastBatteryUpdateDate:"Mar 26", location:"B building"},
-  {id: 3, batteryStatus: 'Low', lastBatteryUpdateDate:"Mar 27", location:"C building"},
-  ];
-
-  */
   }
 }

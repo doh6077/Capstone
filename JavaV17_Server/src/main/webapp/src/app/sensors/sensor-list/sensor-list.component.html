@@ -7,9 +7,12 @@
   </tr>
   @for (sensor of sensors; track sensor.id) {
     <tr>
-      <td>{{ sensor.location }}</td>
-      <td>{{ sensor.batteryStatus }}</td>
-      <td>{{ sensor.lastBatteryUpdateDate }}</td>
+      <td>{{ sensor.macAddress }}</td>
+      <td>{{ sensor.trigerPin }}</td>
+      <td>{{ sensor.echoPin }}</td>
+      <td>
+        <a [routerLink]="['/view', sensor.id, 'history']">Go to History</a>
+      </td>
     </tr>
   }
 </table>

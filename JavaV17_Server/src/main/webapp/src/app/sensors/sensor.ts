@@ -1,10 +1,8 @@
 
 
 export class Sensor {
-    id?: number; 
-    batteryStatus!: string;
-    location!: string;
-    lastBatteryUpdateDate!: string;
-
-
+    id?: number;
+    macAddress!: string;
+    trigerPin!: number;
+    echoPin!: number;
 }
