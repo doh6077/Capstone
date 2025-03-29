@@ -35,7 +35,14 @@ public class SensorReadingHistoryController {
         return sensorReadingHistoryService.findById(id);
     }
     
+    // Delete a reading
+    @DeleteMapping("/{id}")
+    public void deleteReading(@PathVariable Long id) {
+        sensorReadingHistoryService.delete(id);
+    }
+    
     // Get readings by sensor ID
+    // http://localhost:8080/api/readings/sensor/1
     @GetMapping("/sensor/{sensorId}")
     public List<SensorReadingHistory> getReadingsBySensor(@PathVariable Long sensorId) {
         Sensor sensor = sensorService.findById(sensorId);
@@ -43,11 +50,5 @@ public class SensorReadingHistoryController {
             return sensorReadingHistoryService.findBySensorOrderByTimestampDesc(sensor);
         }
         return List.of(); // Return empty list if sensor not found
-    }
-    
-    // Delete a reading
-    @DeleteMapping("/{id}")
-    public void deleteReading(@PathVariable Long id) {
-        sensorReadingHistoryService.delete(id);
     }
 }

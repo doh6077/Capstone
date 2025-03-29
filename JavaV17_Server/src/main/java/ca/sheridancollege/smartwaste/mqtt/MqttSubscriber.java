@@ -43,13 +43,12 @@ public class MqttSubscriber {
 	//private MqttClient client;
 
 //	@PostConstruct
-//    public void init() {
+//  public void init() {
 	public MqttSubscriber() {
 		try {
-			//client = new MqttClient(BROKER_URL, CLIENT_ID, new MemoryPersistence());
-			MqttClient client = new MqttClient(BROKER_URL, CLIENT_ID, new MemoryPersistence());
+			MqttClient client = new MqttClient(BROKER_URL, CLIENT_ID, new MemoryPersistence()); // Creates a new MQTT client
 			MqttConnectOptions options = new MqttConnectOptions();
-			options.setCleanSession(true);
+			options.setCleanSession(true); // Sets up connection options with clean session (doesn't maintain state between connections)
 
 			client.setCallback(new MqttCallback() {
 				@Override
@@ -70,21 +69,24 @@ public class MqttSubscriber {
 				}
 			});
 
+			// Connects to the MQTT broker and subscribes to the topics defined earlier.
 			client.connect(options);
 			client.subscribe(TOPICS);
 			// System.out.println("Subscribed to topics: " + String.join(", ", TOPICS));
 
 		} catch (MqttException e) {
-			e.printStackTrace();
+			e.printStackTrace(); // any MQTT-related exceptions.
 		}
 	}
 	
-
+	// Process incoming messages based on their topic
 	private void handleIncomingMessage(String topic, MqttMessage message) {
 		try {
 			switch (topic) {
 			case "smartwaste/sensor/metadata":
+				// Parses the message payload as JSON
 				JSONObject metaDataJSON = new JSONObject(new String(message.getPayload()));
+				
 				Sensor sensor1 = Sensor.builder().macAddress(metaDataJSON.get("macAddress").toString())
 						.trigerPin(Integer.parseInt(metaDataJSON.get("trigerPin1").toString()))
 						.echoPin(Integer.parseInt(metaDataJSON.get("echoPin1").toString())).build();
@@ -94,6 +96,7 @@ public class MqttSubscriber {
 				Sensor sensor3 = Sensor.builder().macAddress(metaDataJSON.get("macAddress").toString())
 						.trigerPin(Integer.parseInt(metaDataJSON.get("trigerPin3").toString()))
 						.echoPin(Integer.parseInt(metaDataJSON.get("echoPin3").toString())).build();
+				
 				sensorService.save(sensor1);
 				sensorService.save(sensor2);
 				sensorService.save(sensor3);
@@ -108,15 +111,15 @@ public class MqttSubscriber {
 			}
 		} catch (Exception e) {
 			System.err.println("Error processing message: " + e.getMessage());
-			e.printStackTrace();
+			e.printStackTrace(); // any exceptions that occur during message processing.
 		}
 	}
 	
 	private void processReadingData(String payload) {
 		try {
-			// Check if payload is an array
+			// Check if payload is an array or a single JSON object
+			// For an array, iterates through each reading and processes it individually
 			if (payload.trim().startsWith("[")) {
-				// Parse as JSON array
 				JSONArray readingsArray = new JSONArray(payload);
 				
 				for (int i = 0; i < readingsArray.length(); i++) {
@@ -124,7 +127,7 @@ public class MqttSubscriber {
 					processSingleReading(reading);
 				}
 			} else {
-				// Try to parse as single JSON object
+				// For a single object, processes it directly
 				JSONObject reading = new JSONObject(payload);
 				processSingleReading(reading);
 			}
@@ -137,13 +140,12 @@ public class MqttSubscriber {
 	private void processSingleReading(JSONObject reading) {
 		try {
 			String macAddress = reading.getString("macAddress");
-			int trigerPin = reading.getInt("trigerPin1");
-			int echoPin = reading.getInt("echoPin1");
+			int trigerPin = reading.getInt("trigerPin");
+			int echoPin = reading.getInt("echoPin");
 			double distance = reading.getDouble("distance");
 			
 			// Find the corresponding sensor
-			Sensor sensor = sensorRepository.findByMacAddressAndTrigerPinAndEchoPin(macAddress, trigerPin, echoPin)
-					.orElse(null);
+			Sensor sensor = sensorRepository.findByMacAddressAndTrigerPinAndEchoPin(macAddress, trigerPin, echoPin).orElse(null);
 			
 			if (sensor != null) {
 				// Create and save the reading history
@@ -156,12 +158,11 @@ public class MqttSubscriber {
 				sensorReadingHistoryService.save(readingHistory);
 				System.out.println("Saved reading history: " + readingHistory);
 			} else {
-				System.out.println("Sensor not found for MAC: " + macAddress + 
-						", trigerPin: " + trigerPin + ", echoPin: " + echoPin);
+				System.out.println("Sensor not found for MAC: " + macAddress + ", trigerPin: " + trigerPin + ", echoPin: " + echoPin);
 			}
 		} catch (Exception e) {
 			System.err.println("Error processing single reading: " + e.getMessage());
-			e.printStackTrace();
+			e.printStackTrace(); // any exceptions that occur during processing of a single reading.
 		}
 	}
 }

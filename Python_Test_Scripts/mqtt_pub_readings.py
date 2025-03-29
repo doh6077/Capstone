@@ -11,20 +11,20 @@ TOPIC = "smartwaste/sensor/reading-data"
 MESSAGE = [
     {
         "macAddress": "34:b7:da:5d:80:0c",
-        "trigerPin1": 7,
-        "echoPin1": 8,
+        "trigerPin": 7,
+        "echoPin": 8,
         "distance": 76.70
     },
     {
         "macAddress": "34:b7:da:5d:80:0c",
-        "trigerPin1": 12,
-        "echoPin1": 4,
+        "trigerPin": 12,
+        "echoPin": 4,
         "distance": 93.50
     },
     {
         "macAddress": "34:b7:da:5d:80:0c",
-        "trigerPin1": 2,
-        "echoPin1": 13,
+        "trigerPin": 2,
+        "echoPin": 13,
         "distance": 49.18
     }
 ]

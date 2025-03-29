@@ -3,8 +3,9 @@ import json
 
 BROKER = "localhost"  # broker ip
 PORT = 1883  # broker port
-# TOPIC = "smartwaste/sensor/metadata"
-TOPIC = "smartwaste/sensor/reading-data"
+TOPIC = "smartwaste/sensor/metadata"
+# TOPIC = "smartwaste/sensor/reading-data"
+
 MESSAGE = {
     "macAddress":"34:b7:da:5d:80:0c",
     "trigerPin1":7,
