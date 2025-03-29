@@ -21,14 +21,16 @@ String SensorReader::readData() {
     digitalWrite(sensors[i].getTrigerPin(), LOW);
     delayMicroseconds(2);
     digitalWrite(sensors[i].getTrigerPin(), HIGH);
-    delayMicroseconds(10); 
+    delayMicroseconds(10);
     digitalWrite(sensors[i].getTrigerPin(), LOW);
-    long duration = pulseIn(sensors[i].getEchoPin(), HIGH); 
-    float distance = duration * 0.034 / 2;    // Convert to cm
+    long duration = pulseIn(sensors[i].getEchoPin(), HIGH);
+    float distance = duration * 0.034 / 2;  // Convert to cm
+    char distanceStr[10];
+    snprintf(distanceStr, sizeof(distanceStr), "%.2f", distance); // keep 2 digits after decimal
     oneSensorReading["macAddress"] = macAddress;
     oneSensorReading["trigerPin1"] = sensors[i].getTrigerPin();
     oneSensorReading["echoPin1"] = sensors[i].getEchoPin();
-    oneSensorReading["distance"] = distance;
+    oneSensorReading["distance"] = distanceStr;
     sensorsReading[i] = oneSensorReading;
   }
   String sensorReadingJSON = JSON.stringify(sensorsReading);
@@ -46,9 +48,9 @@ String SensorReader::registerSensor() {
   sensorJSON["echoPin2"] = echoPin2;
   sensorJSON["trigerPin3"] = trigerPin3;
   sensorJSON["echoPin3"] = echoPin3;
-  sensors[0] = Sensor{macAddress, trigerPin1, echoPin1};
-  sensors[1] = Sensor{macAddress, trigerPin2, echoPin2};
-  sensors[2] = Sensor{macAddress, trigerPin3, echoPin3};
+  sensors[0] = Sensor{ macAddress, trigerPin1, echoPin1 };
+  sensors[1] = Sensor{ macAddress, trigerPin2, echoPin2 };
+  sensors[2] = Sensor{ macAddress, trigerPin3, echoPin3 };
   String sensorMetadata = JSON.stringify(sensorJSON);
   return sensorMetadata;
 }

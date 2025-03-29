@@ -3,6 +3,7 @@
 
 #include <WiFiS3.h>
 
+
 class WiFiConnecter {
 private:
   char ssid[30] = "Benny";  // network SSID

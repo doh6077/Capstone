@@ -17,7 +17,7 @@ void MqttPublisher::connectToBroker() {
 void MqttPublisher::publishSensorReading(String sensorReadingData) {
   Serial.print("Reading Data: ");
   Serial.println(sensorReadingData);
-  char* topic = "smartwaste/sensor/readingdata";
+  char* topic = "smartwaste/sensor/reading-data";
   mqttClient.poll();
   mqttClient.beginMessage(topic);
   mqttClient.print(sensorReadingData);

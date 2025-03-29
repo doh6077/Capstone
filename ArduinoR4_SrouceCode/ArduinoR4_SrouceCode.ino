@@ -29,5 +29,5 @@ void setup() {
 void loop() {
   String sensorMetadata = sensorReader.readData();
   mqttPublisher.publishSensorReading(sensorMetadata);
-  delay(5000);
+  delay(20000);
 }
