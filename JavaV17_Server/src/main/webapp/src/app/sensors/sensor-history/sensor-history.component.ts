@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { SensorReadingHistory } from '../sensor-reading-history';
 import { SensorHistoryService } from '../sensor-history.service';
@@ -10,23 +10,21 @@ import { SensorHistoryService } from '../sensor-history.service';
   styleUrls: ['./sensor-history.component.css']
 })
 export class SensorHistoryComponent implements OnInit {
-  sensorId!: number;
   readings: SensorReadingHistory[] = [];
-
+  @Input() id = 0;
   constructor(
     private sensorHistoryService: SensorHistoryService,
-    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.sensorId = +this.route.snapshot.paramMap.get('id')!;
     this.getReadings();
   }
 
   getReadings(): void {
-    this.sensorHistoryService.getHistoryBySensorId(this.sensorId).subscribe({
+    this.sensorHistoryService.getHistoryBySensorId(this.id).subscribe({
       next: (data) => {
         this.readings = data;
+
       },
       error: (err) => {
         console.error('Failed to load sensor history:', err);
