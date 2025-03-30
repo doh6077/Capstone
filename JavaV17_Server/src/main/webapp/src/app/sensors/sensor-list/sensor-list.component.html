@@ -1,12 +1,14 @@
 <h3>Sensor List</h3>
 <table class="table table-striped">
   <tr>
-    <th>Location</th>
-    <th>Battery Status</th>
-    <th>Last Battery Update</th>
+    <th>Sensor ID</th>
+    <th>Mac Address</th>
+    <th>Triger Pin</th>
+    <th>Echo Pin</th>
   </tr>
   @for (sensor of sensors; track sensor.id) {
     <tr>
+      <td>{{ sensor.id }}</td>
       <td>{{ sensor.macAddress }}</td>
       <td>{{ sensor.trigerPin }}</td>
       <td>{{ sensor.echoPin }}</td>
