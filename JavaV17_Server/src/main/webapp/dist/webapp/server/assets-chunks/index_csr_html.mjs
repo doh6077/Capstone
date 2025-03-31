@@ -1,4 +1,4 @@
-<!doctype html>
+export default `<!doctype html>
 <html lang="en" data-beasties-container="">
 <head>
   <meta charset="utf-8">
@@ -11,3 +11,4 @@
   <app-root></app-root>
 <script src="polyfills-TECF5RVS.js" type="module"></script><script src="main-5E3SEOT6.js" type="module"></script></body>
 </html>
+`;
