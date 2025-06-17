@@ -21,4 +21,15 @@ public class Cleaner {
     private String name;
     private String email;
     private String phoneNumber;
+
+     // Many-to-many with TrashBin
+    @ManyToMany
+    @JoinTable(
+        name = "cleaner_trash_bin", // name of the join table JPA will auto-create
+        joinColumns = @JoinColumn(name = "cleaner_id"), // FK to Cleaner
+        inverseJoinColumns = @JoinColumn(name = "bin_id") // FK to TrashBin
+    )
+    private List<TrashBin> bins;
 }
+
+
