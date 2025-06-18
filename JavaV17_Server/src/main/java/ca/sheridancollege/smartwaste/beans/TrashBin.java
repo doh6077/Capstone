@@ -26,9 +26,7 @@ public class TrashBin {
     @JoinColumn(name = "sensor_id")
     private Sensor sensor;
 
-    // Many bins can share the same type
-    @ManyToOne
-    @JoinColumn(name = "type_id")
+    @Enumerated(EnumType.STRING)
     private TrashBinType type;
 
     // Many bins can be in the same location
