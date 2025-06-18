@@ -1,4 +1,4 @@
-package ca.sheridancollege.smartwaste.controllers;
+package ca.sheridancollege.smartwaste.web.rest;
 
 import java.util.List;
 
@@ -66,6 +66,6 @@ public class TrashBinController {
     // Get bins by assigned cleaner
     @PostMapping("/by-cleaner")
     public List<TrashBin> getBinsByCleaner(@RequestBody Cleaner cleaner) {
-        return trashBinService.findByCleaners(cleaner);
+        return trashBinService.findByCleaner(cleaner);
     }
 }

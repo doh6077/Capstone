@@ -1,7 +1,11 @@
 package ca.sheridancollege.smartwaste.repositories;
-
+import java.util.List;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import ca.sheridancollege.smartwaste.beans.TrashBinLocation;
 import ca.sheridancollege.smartwaste.beans.TrashBin;
+import ca.sheridancollege.smartwaste.beans.TrashBinType;
+import ca.sheridancollege.smartwaste.beans.Cleaner;
 
 public interface TrashBinRepository extends JpaRepository<TrashBin, Long> {
      // Find bins by name
