@@ -14,12 +14,12 @@ public class SensorBootstrap implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-//		Sensor sensor1 = Sensor.builder().macAddress("34:b7:da:5d:80:0c").trigerPin(7).echoPin(8).build();
-//		Sensor sensor2 = Sensor.builder().macAddress("34:b7:da:5d:80:0c").trigerPin(12).echoPin(13).build();
-//		Sensor sensor3 = Sensor.builder().macAddress("34:b7:da:5d:80:0c").trigerPin(2).echoPin(4).build();
-//		sensorService.save(sensor1);
-//		sensorService.save(sensor2);
-//		sensorService.save(sensor3);
+		Sensor sensor1 = Sensor.builder().macAddress("34:b7:da:5d:80:0c").trigerPin(7).echoPin(8).build();
+		Sensor sensor2 = Sensor.builder().macAddress("34:b7:da:5d:80:0c").trigerPin(12).echoPin(13).build();
+		Sensor sensor3 = Sensor.builder().macAddress("34:b7:da:5d:80:0c").trigerPin(2).echoPin(4).build();
+		sensorService.save(sensor1);
+		sensorService.save(sensor2);
+		sensorService.save(sensor3);
 	}
 
 }
