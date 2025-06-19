@@ -15,7 +15,7 @@ public class TrashBinLocationController {
 
     private TrashBinLocationService locationService;
 
-    @GetMapping({"", "/"})
+    @GetMapping
     public List<TrashBinLocation> getAllLocations() {
         return locationService.findAll();
     }
@@ -25,7 +25,7 @@ public class TrashBinLocationController {
         return locationService.findById(id);
     }
 
-    @PostMapping(value = {"", "/"}, headers = {"Content-type=application/json"})
+    @PostMapping(headers = { "Content-type=application/json" })
     public TrashBinLocation addLocation(@RequestBody TrashBinLocation location) {
         location.setGeoID(null);
         return locationService.save(location);
