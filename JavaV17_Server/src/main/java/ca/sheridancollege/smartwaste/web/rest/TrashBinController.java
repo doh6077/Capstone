@@ -19,7 +19,7 @@ public class TrashBinController {
     private TrashBinService trashBinService;
 
     // Get all trash bins
-    @GetMapping({"", "/"})
+    @GetMapping
     public List<TrashBin> getAllBins() {
         return trashBinService.findAll();
     }
@@ -31,7 +31,7 @@ public class TrashBinController {
     }
 
     // Add a new bin
-    @PostMapping(value = {"", "/"}, headers = {"Content-type=application/json"})
+    @PostMapping(headers = { "Content-type=application/json" })
     public TrashBin createBin(@RequestBody TrashBin bin) {
         bin.setBinID(null); // prevent accidental updates
         return trashBinService.save(bin);
