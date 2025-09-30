@@ -42,16 +42,24 @@ public class CleanerServiceImpl implements CleanerService {
 
 	@Override
 	public Cleaner save(Cleaner cleaner) {
-		// Map shiftIds to Shift entities 
-		if ( cleaner.getShiftIds() != null){
+		// If the cleaner has a list of shift IDs provided from the frontend
+		if (cleaner.getShiftIds() != null) {
+			// Fetch the corresponding Shift entities from the database
 			List<Shift> shifts = shiftService.findAllById(cleaner.getShiftIds());
+
+			// Set the cleaner's shifts to the fetched list
 			cleaner.setShifts(shifts);
-			for (Shift s : shifts){
+
+			// add the cleaner to each shift
+			for (Shift s : shifts) {
 				s.getCleaners().add(cleaner);
 			}
 		}
+
+		// Save the cleaner along with the shift relationships
 		return cleanerRepository.save(cleaner);
 	}
+
 	// need to update 
 	@Override
 	public Cleaner update(Long id, Cleaner updatedCleaner) {

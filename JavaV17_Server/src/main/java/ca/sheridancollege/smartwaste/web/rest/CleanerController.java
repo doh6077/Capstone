@@ -37,7 +37,10 @@ public class CleanerController {
     // Add a new Cleaner
     @PostMapping(value = {"", "/"}, headers = {"Content-type=application/json"})
     public Cleaner postCleaner(@RequestBody Cleaner cleaner) {
-        cleaner.setId(null);  
+        // Set ID to null to ensure a new Cleaner is created (not updating an existing one)
+        cleaner.setId(null);
+
+        // Delegate to service layer to handle saving and relationship mapping
         return cleanerService.save(cleaner);
     }
     

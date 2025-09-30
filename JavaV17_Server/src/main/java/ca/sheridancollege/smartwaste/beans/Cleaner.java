@@ -1,22 +1,9 @@
 package ca.sheridancollege.smartwaste.beans;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Transient;
 
 @Entity
 @Data
@@ -24,30 +11,41 @@ import jakarta.persistence.Transient;
 @AllArgsConstructor
 @Builder
 public class Cleaner {
+
+    // Primary key for the Cleaner table, auto-generated
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // Basic profile information for the cleaner
     private String name;
     private String email;
     private String phoneNumber;
 
-    // Many-to-many with TrashBin
+    // Many-to-many relationship with TrashBin
+    // A cleaner can be assigned to multiple bins and vice versa
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "cleaner_trash_bin", // name of the join table JPA will auto-create
-            joinColumns = @JoinColumn(name = "cleaner_id"), // FK to Cleaner
-            inverseJoinColumns = @JoinColumn(name = "bin_id") // FK to TrashBin
+    @JoinTable(
+        name = "cleaner_trash_bin", // Name of the join table
+        joinColumns = @JoinColumn(name = "cleaner_id"), // FK referencing Cleaner
+        inverseJoinColumns = @JoinColumn(name = "bin_id") // FK referencing TrashBin
     )
-    @JsonIgnore
+    @JsonIgnore 
     private List<TrashBin> bins;
 
-    // Many-to-many with Shift
+    // Many-to-many relationship with Shift
+    // A cleaner can have multiple shifts and each shift can include multiple cleaners
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "shift_cleaner", // name of the join table JPA will auto-create
-            joinColumns = @JoinColumn(name = "cleaner_id"), inverseJoinColumns = @JoinColumn(name = "shift_id"))
-    @JsonIgnore
+    @JoinTable(
+        name = "shift_cleaner", // Name of the join table
+        joinColumns = @JoinColumn(name = "cleaner_id"), // FK referencing Cleaner
+        inverseJoinColumns = @JoinColumn(name = "shift_id") // FK referencing Shift
+    )
+    @JsonIgnore 
     private List<Shift> shifts;
 
+    // Transient field used for receiving shift IDs from the frontend
+    // Not stored in the database
     @Transient
     private List<Long> shiftIds;
 }
