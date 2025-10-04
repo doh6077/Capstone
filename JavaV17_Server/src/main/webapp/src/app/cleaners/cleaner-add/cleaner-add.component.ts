@@ -81,7 +81,7 @@ export class CleanerAddComponent {
         // Emit event for other components (e.g., list refresh), show alert, and redirect
         this.cleanerService.onCleanerAdded.emit(response);
         alert("Cleaner saved successfully!");
-        this.router.navigate(['/add/cleaners']);
+        this.router.navigate(['/cleaners']);
       },
       error: (error) => {
         // Handle and show error if the API request fails
