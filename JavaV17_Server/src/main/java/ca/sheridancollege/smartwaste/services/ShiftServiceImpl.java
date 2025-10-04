@@ -1,5 +1,6 @@
 package ca.sheridancollege.smartwaste.services;
 
+import java.time.DayOfWeek;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +31,10 @@ public class ShiftServiceImpl implements ShiftService {
             return null;
     }
 
+    @Override 
+    public DayOfWeek[] findAllDayOfWeek(){
+        return DayOfWeek.values();
+    }
     @Override
     public Shift save(Shift shift) {
         return shiftRepository.save(shift);

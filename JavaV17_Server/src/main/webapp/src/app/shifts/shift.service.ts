@@ -18,6 +18,12 @@ export class ShiftService {
   getAll(): Observable<Shift[]>{ 
     return this.http.get<Shift[]>(restUrl); 
   } 
+
+
+  getAllDayOfWeek(): Observable<any>{ 
+    return this.http.get<any>('${restUrl}/dayOfWeek');
+  } 
+
   //Create a connection to the POST mapping in the 
   //rest controller.  "data" will be the new Shift. 
   create(data:any):Observable<any>{ 

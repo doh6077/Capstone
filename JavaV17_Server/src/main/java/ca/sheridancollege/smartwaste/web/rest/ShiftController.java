@@ -1,5 +1,6 @@
 package ca.sheridancollege.smartwaste.web.rest;
 
+import java.time.DayOfWeek;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -37,7 +38,11 @@ public class ShiftController {
     public Shift getshiftById(@PathVariable Long id) {
         return shiftService.findById(id);
     }
-
+    // Get all dayOfWeek
+    @GetMapping({ "/dayOfWeek" })
+    public DayOfWeek[] getDayOfWeek() {
+        return shiftService.findAllDayOfWeek();
+    }
     // Add a new shift
     @PostMapping(value = { "", "/" }, headers = { "Content-type=application/json" })
     public Shift postshift(@RequestBody Shift shift) {

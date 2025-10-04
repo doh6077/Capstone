@@ -1,6 +1,18 @@
 {
   "routes": {
     "/": {},
-    "/view": {}
+    "/about": {},
+    "/add/cleaners": {},
+    "/add/shifts": {},
+    "/add/trashbins": {},
+    "/cleaners": {},
+    "/home": {},
+    "/sensors": {},
+    "/shifts": {},
+    "/trashbins": {},
+    "/view/cleaners": {},
+    "/view/sensors": {},
+    "/view/shifts": {},
+    "/view/trashbins": {}
   }
 }

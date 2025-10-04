@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import ca.sheridancollege.smartwaste.beans.Sensor;
 import ca.sheridancollege.smartwaste.beans.TrashBin;
 import ca.sheridancollege.smartwaste.repositories.SensorRepository;
-import ca.sheridancollege.smartwaste.services.TrashBinService;
 import lombok.AllArgsConstructor;
 
 @Service
