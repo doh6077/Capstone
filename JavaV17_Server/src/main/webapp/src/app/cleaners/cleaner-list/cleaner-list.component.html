@@ -1,9 +1,6 @@
-
 <div class="d-flex align-items-center justify-content-between mb-4">
-<h3>Cleaner List</h3>
-  <a routerLink="/add/cleaners" class="btn btn-theme-outline">
-    Add Cleaner
-  </a>
+  <h3>Cleaner List</h3>
+  <a routerLink="/add/cleaners" class="btn btn-theme-outline"> Add Cleaner </a>
 </div>
 <div class="table-responsive">
   <table class="table table-striped table-hover align-middle table-sm">
@@ -12,7 +9,7 @@
         <th>Name</th>
         <th>Email</th>
         <th>Phone Number</th>
-        <th>Shift</th>
+        <th>Assigned Shifts</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -21,7 +18,13 @@
       <tr>
         <td>
           <div *ngIf="cleaner.isEdit">
-            <input class="form-control" id="name" type="text" name="name" [(ngModel)]="cleaner.name" />
+            <input
+              class="form-control"
+              [id]="'name-' + cleaner.id"
+              type="text"
+              name="name"
+              [(ngModel)]="cleaner.name"
+            />
           </div>
           <div *ngIf="!cleaner.isEdit">
             {{ cleaner.name }}
@@ -29,7 +32,13 @@
         </td>
         <td>
           <div *ngIf="cleaner.isEdit">
-            <input class="form-control" id="email" type="text" name="email" [(ngModel)]="cleaner.email" />
+            <input
+              class="form-control"
+              [id]="'email-' + cleaner.id"
+              type="email"
+              name="email"
+              [(ngModel)]="cleaner.email"
+            />
           </div>
           <div *ngIf="!cleaner.isEdit">
             {{ cleaner.email }}
@@ -37,8 +46,13 @@
         </td>
         <td>
           <div *ngIf="cleaner.isEdit">
-            <input class="form-control" id="phoneNumber" type="text" name="phoneNumber"
-              [(ngModel)]="cleaner.phoneNumber" />
+            <input
+              class="form-control"
+              [id]="'phonenumber-' + cleaner.id"
+              type="tel"
+              name="phoneNumber"
+              [(ngModel)]="cleaner.phoneNumber"
+            />
           </div>
           <div *ngIf="!cleaner.isEdit">
             {{ cleaner.phoneNumber }}
@@ -48,39 +62,53 @@
           <div *ngIf="cleaner.isEdit">
             <mat-form-field>
               <mat-label>Selected Shifts:</mat-label>
-              <mat-select [formControl]="shiftsSelected" multiple>
-                <mat-option *ngFor="let shift of shiftList" [value]="shift.id">
-                  {{shift.dayOfWeek }}, {{shift.shiftTime }}
+              <mat-select [(ngModel)]="cleaner.shiftIds" multiple>
+                <mat-option
+                  class="text-lowercase"
+                  *ngFor="let shift of shiftList"
+                  [value]="shift.id"
+                >
+                  {{ shift.dayOfWeek }} - {{ shift.shiftTime }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
           </div>
           <div *ngIf="!cleaner.isEdit">
-            @if (cleaner.shifts?.length) {
-            @for (s of cleaner.shifts; track s.id ?? $index) {
-            <span>{{ s.dayOfWeek }}, {{ s.shiftTime }} </span>
-            }
-            } @else {
-            —
-            }
+            @if (cleaner.shifts?.length) { @for (s of cleaner.shifts; track s.id
+            ?? $index) {
+            <span class="text-lowercase"
+              >{{ s.dayOfWeek }} - {{ s.shiftTime }} |
+            </span>
+            } } @else { — }
           </div>
         </td>
-<td>
-  <div *ngIf="cleaner.isEdit">
-    <button class="btn btn-update btn-sm" (click)="onUpdate(cleaner.id!, cleaner)">Update</button>
-    <button class="btn btn-cancel btn-sm mx-2" (click)="onCancle(cleaner)">Cancel</button>
-  </div>
+        <td>
+          <div *ngIf="cleaner.isEdit">
+            <button class="btn btn-update btn-sm" (click)="onUpdate(cleaner)">
+              Update
+            </button>
+            <button
+              class="btn btn-cancel btn-sm mx-2"
+              (click)="onCancel(cleaner)"
+            >
+              Cancel
+            </button>
+          </div>
 
-  <div *ngIf="!cleaner.isEdit">
-    <button class="btn btn-edit btn-sm" (click)="onEdit(cleaner)">Edit</button>
-    <button class="btn btn-danger-soft btn-sm mx-2" (click)="deleteCleaner(cleaner.id!)">Delete</button>
-  </div>
-</td>
-
+          <div *ngIf="!cleaner.isEdit">
+            <button class="btn btn-edit btn-sm" (click)="onEdit(cleaner)">
+              Edit
+            </button>
+            <button
+              class="btn btn-danger-soft btn-sm mx-2"
+              (click)="deleteCleaner(cleaner.id!)"
+            >
+              Delete
+            </button>
+          </div>
+        </td>
       </tr>
       }
     </tbody>
   </table>
 </div>
-
-

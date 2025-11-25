@@ -28,7 +28,6 @@ export class CleanerListComponent implements OnInit {
   cleaners: Cleaner[] = [];
   shiftList: Shift[] = [];
 
-  shiftsSelected = new FormControl<number[] | null>([]);
   cleaner: Cleaner = {
     id: 0,
     name: '',
@@ -57,9 +56,6 @@ export class CleanerListComponent implements OnInit {
         //console.error('Failed to load shifts:', err);
       },
     });
-    this.shiftsSelected.valueChanges.subscribe((value) => {
-      //console.log('Selected shift IDs changed:', value);
-    });
   }
 
   getCleaners(): void {
@@ -81,29 +77,24 @@ export class CleanerListComponent implements OnInit {
   }
 
   onEdit(cleaner: Cleaner) {
+    // close all others
+    this.cleaners.forEach((c) => {
+      if (c !== cleaner) c.isEdit = false;
+    });
+
     cleaner.isEdit = true;
 
-    // Make sure shiftIds exists
-    cleaner.shiftIds = [];
-
-    // Build shiftIds from cleaner.shifts (if there is a 'shifts' array)
-    if (cleaner.shifts && cleaner.shifts.length > 0) {
-      for (const shift of cleaner.shifts) {
-        cleaner.shiftIds.push(shift.id!);
-      }
+    if (!cleaner.shiftIds || cleaner.shiftIds.length === 0) {
+      cleaner.shiftIds = cleaner.shifts?.map((s) => s.id!) ?? [];
     }
-
-    // Detach the reference and store a backup copy
+    // Create a backup copy of this cleaner object
     this.cleaner = {
       ...cleaner,
       shiftIds: [...(cleaner.shiftIds ?? [])],
     };
-
-    // Set the selected values in the FormControl for the dropdown
-    this.shiftsSelected.setValue(cleaner.shiftIds ?? []);
   }
 
-  onCancle(cleaner: Cleaner) {
+  onCancel(cleaner: Cleaner) {
     cleaner.isEdit = false;
     // restore the original values
     cleaner.name = this.cleaner.name;
@@ -111,20 +102,19 @@ export class CleanerListComponent implements OnInit {
     cleaner.phoneNumber = this.cleaner.phoneNumber;
     cleaner.shiftIds = this.cleaner.shiftIds;
   }
-  onUpdate(id: number, updatedCleaner: Cleaner): void {
+  onUpdate(updatedCleaner: Cleaner): void {
     const data = {
       name: updatedCleaner.name,
       email: updatedCleaner.email,
       phoneNumber: updatedCleaner.phoneNumber,
-      shiftIds: this.shiftsSelected.value ?? [],
+      shiftIds: updatedCleaner.shiftIds ?? [],
     };
-    if (confirm('Are you sure you want to edit ' + id + '?')) {
-      this.cleanerService.update(id, data).subscribe({
+
+    if (confirm('Are you sure you want to edit ' + updatedCleaner.id + '?')) {
+      this.cleanerService.update(updatedCleaner.id!, data).subscribe({
         next: () => {
           alert('Cleaner Updated');
           this.getCleaners();
-          this.cleaner.isEdit = false;
-          this.shiftsSelected.setValue([]);
         },
         error: (err) => {
           console.error('Failed to update cleaner:', err);
