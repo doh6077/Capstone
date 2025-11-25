@@ -76,50 +76,68 @@ export class CleanerListComponent implements OnInit {
     }
   }
 
-  onEdit(cleaner: Cleaner) {
-    // close all others
-    this.cleaners.forEach((c) => {
-      if (c !== cleaner) c.isEdit = false;
+onEdit(cleaner: Cleaner) {
+  // Make sure only one cleaner row is in "edit" mode at a time
+  this.cleaners.forEach((c) => {
+    if (c !== cleaner) c.isEdit = false;
+  });
+
+  // Enable edit mode for the selected cleaner
+  cleaner.isEdit = true;
+
+  // If shiftIds are not initialized, build them from the existing shifts relation
+  // This preserves previously selected shifts when entering edit mode
+  if (!cleaner.shiftIds || cleaner.shiftIds.length === 0) {
+    cleaner.shiftIds = cleaner.shifts?.map((s) => s.id!) ?? [];
+  }
+
+  // Keep a separate copy of the cleaner for the edit form
+  // so changes in the form don't immediately mutate the list item
+  this.cleaner = {
+    ...cleaner,
+    // Clone shiftIds to avoid mutating the original array by reference
+    shiftIds: [...(cleaner.shiftIds ?? [])],
+  };
+}
+
+
+onCancel(cleaner: Cleaner) {
+  // Exit edit mode for this cleaner row
+  cleaner.isEdit = false;
+
+  // Restore the original values from the backup `this.cleaner`
+  cleaner.name = this.cleaner.name;
+  cleaner.email = this.cleaner.email;
+  cleaner.phoneNumber = this.cleaner.phoneNumber;
+
+  // Restore previously selected shifts
+  cleaner.shiftIds = this.cleaner.shiftIds;
+}
+
+onUpdate(updatedCleaner: Cleaner): void {
+  // Prepare the payload to send to the backend (only fields that can be updated)
+  const data = {
+    name: updatedCleaner.name,
+    email: updatedCleaner.email,
+    phoneNumber: updatedCleaner.phoneNumber,
+    // Ensure shiftIds is always an array when sending to the API
+    shiftIds: updatedCleaner.shiftIds ?? [],
+  };
+
+  // Ask the user for confirmation before updating this cleaner
+  if (confirm('Are you sure you want to edit ' + updatedCleaner.id + '?')) {
+    // Call the service to update the cleaner on the server
+    this.cleanerService.update(updatedCleaner.id!, data).subscribe({
+      next: () => {
+        // Notify the user and refresh the list after a successful update
+        alert('Cleaner Updated');
+        this.getCleaners();
+      },
+      error: (err) => {
+        // Log any errors that occur during the update
+        console.error('Failed to update cleaner:', err);
+      },
     });
-
-    cleaner.isEdit = true;
-
-    if (!cleaner.shiftIds || cleaner.shiftIds.length === 0) {
-      cleaner.shiftIds = cleaner.shifts?.map((s) => s.id!) ?? [];
-    }
-    // Create a backup copy of this cleaner object
-    this.cleaner = {
-      ...cleaner,
-      shiftIds: [...(cleaner.shiftIds ?? [])],
-    };
   }
-
-  onCancel(cleaner: Cleaner) {
-    cleaner.isEdit = false;
-    // restore the original values
-    cleaner.name = this.cleaner.name;
-    cleaner.email = this.cleaner.email;
-    cleaner.phoneNumber = this.cleaner.phoneNumber;
-    cleaner.shiftIds = this.cleaner.shiftIds;
-  }
-  onUpdate(updatedCleaner: Cleaner): void {
-    const data = {
-      name: updatedCleaner.name,
-      email: updatedCleaner.email,
-      phoneNumber: updatedCleaner.phoneNumber,
-      shiftIds: updatedCleaner.shiftIds ?? [],
-    };
-
-    if (confirm('Are you sure you want to edit ' + updatedCleaner.id + '?')) {
-      this.cleanerService.update(updatedCleaner.id!, data).subscribe({
-        next: () => {
-          alert('Cleaner Updated');
-          this.getCleaners();
-        },
-        error: (err) => {
-          console.error('Failed to update cleaner:', err);
-        },
-      });
-    }
-  }
+}
 }
