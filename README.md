@@ -1,18 +1,20 @@
-2025 Sheridan Capstone Project
+# 2025 Sheridan Capstone Project
 
-Smart Waste Management System
+## Smart Waste Management System
 
-Team15
+**Team 15**
 
--   Professor:
-    -   Kevin Anstey
--   Team Member:
-    -   Shuya Hu
-    -   Dohee Kim
-    -   Jie Chen
-    -   Sichao Quan
+### Professor
+- Kevin Anstey
 
+### Team Members
+- Shuya Hu
+- Dohee Kim
+- Jie Chen
+- Sichao Quan
 
+### Demo Video
+[Watch the demo video on YouTube](https://www.youtube.com/watch?v=5-iySpclYTk)
  
 ![Slide1](https://github.com/user-attachments/assets/970b692c-6765-4dd5-876b-d6f3ac6b6a48)
 ---
